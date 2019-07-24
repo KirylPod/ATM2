@@ -1,4 +1,4 @@
-package card;
+package interfaces;
 
 public interface CardInterface {
 }

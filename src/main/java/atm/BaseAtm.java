@@ -1,4 +1,7 @@
 package atm;
 
-public abstract class BaseAtm {
+import interfaces.AtmInterface;
+
+public abstract class BaseAtm implements AtmInterface {
+
 }

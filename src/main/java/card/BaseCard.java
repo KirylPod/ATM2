@@ -1,4 +1,6 @@
 package card;
 
-public abstract class BaseCard {
+import interfaces.CardInterface;
+
+public abstract class BaseCard implements CardInterface {
 }

@@ -1,4 +1,6 @@
 package bank;
 
-public abstract class BaseBank {
+import interfaces.BankInterface;
+
+public abstract class BaseBank implements BankInterface {
 }

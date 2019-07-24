@@ -1,4 +1,6 @@
 package client;
 
-public abstract class BaseClient {
+import interfaces.ClientInterface;
+
+public abstract class BaseClient implements ClientInterface {
 }

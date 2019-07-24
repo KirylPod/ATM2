@@ -1,4 +1,4 @@
-package atm;
+package interfaces;
 
 public interface AtmInterface {
 }
