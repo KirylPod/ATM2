@@ -20,6 +20,6 @@ public abstract class AbstractCard implements CardInterface {
 
     private String cardPin;
 
-    private String attempts;
+
 
 }

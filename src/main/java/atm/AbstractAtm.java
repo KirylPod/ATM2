@@ -14,6 +14,7 @@ import lombok.Setter;
 public abstract class AbstractAtm implements AtmInterface {
 
     private int cash;
+
     private BankInterface bank;
 
 

@@ -15,4 +15,8 @@ public abstract class AbstarctBank implements BankInterface {
 
     private String name;
 
+    private String cardId, cardPin, cardCash;
+
+    private String attempts;
+
 }

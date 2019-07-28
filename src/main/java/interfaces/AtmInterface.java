@@ -2,11 +2,11 @@ package interfaces;
 
 public interface AtmInterface {
 
-    public void enterId();
+    public void inputId(String clientId);
 
-    public void enterPin();
+    public void inputPin(String clientPin);
 
-    public void enterCash();
+    public void inputCash();
 
     public void getCash();
 

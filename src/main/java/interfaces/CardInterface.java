@@ -2,8 +2,8 @@ package interfaces;
 
 public interface CardInterface {
 
-    String getClientId();
+    public String getClientId(ClientInterface clientInterface);
 
-    String getClientPin();
+    public String getClientPin(ClientInterface clientInterface);
 
 }

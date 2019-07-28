@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 public interface BankInterface {
 
+    public void checkId(String clientId);
+
+    public void checkPin(String clientPin);
+
     public void setClient();
 
-    void getClient();
+    public void getClient();
 
     String getName();
 
-    ArrayList<AtmInterface> getAtmList();
 
-    ArrayList<ClientInterface> getClientList();
 
 }
