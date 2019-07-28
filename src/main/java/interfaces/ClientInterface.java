@@ -1,11 +1,12 @@
 package interfaces;
 
+import java.io.IOException;
+
 public interface ClientInterface {
 
-    public String enterId(String clientId);
+    public String enterClientId() throws IOException;
 
-    public String enterPin(String clientPin);
+    public void errorClientId() throws IOException;
 
-    public String enterCash(String clientCash);
 
 }

@@ -1,15 +1,17 @@
 package interfaces;
 
+import java.io.IOException;
+
 public interface AtmInterface {
 
-    public void inputId(String clientId);
+    public String inputId(String clientId) throws IOException;
 
-    public void inputPin(String clientPin);
+    public String inputPin(String clientPin) throws IOException;
 
-    public void inputCash();
+    public String inputCash();
 
-    public void getCash();
+    public String getCash();
 
-    public void setCash();
+    public String setCash();
 
 }

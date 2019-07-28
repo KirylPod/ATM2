@@ -7,15 +7,40 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 public abstract class AbstractAtm implements AtmInterface {
 
-    private int cash;
+   public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    private BankInterface bank;
+    @Override
+    public String inputId(String clientId) throws IOException {
+        return null;
+    }
 
+    @Override
+    public String inputPin(String clientPin) throws IOException {
+        return null;
+    }
 
+    @Override
+    public String inputCash() {
+        return null;
+    }
+
+    @Override
+    public String getCash() {
+        return null;
+    }
+
+    @Override
+    public String setCash() {
+        return null;
+    }
 }

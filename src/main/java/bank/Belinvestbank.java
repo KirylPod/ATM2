@@ -8,12 +8,6 @@ import java.util.ArrayList;
 public class Belinvestbank extends AbstarctBank {
 
 
-    public void setClient() {
 
-    }
-
-    public void getClient() {
-
-    }
 
 }

@@ -14,12 +14,17 @@ import lombok.Setter;
 
 public abstract class AbstractCard implements CardInterface {
 
-    private BankInterface bank;
-
     private String cardId;
 
     private String cardPin;
 
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
 
 
 }

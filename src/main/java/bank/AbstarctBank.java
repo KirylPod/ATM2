@@ -13,10 +13,32 @@ import lombok.Setter;
 
 public abstract class AbstarctBank implements BankInterface {
 
-    private String name;
-
     private String cardId, cardPin, cardCash;
 
     private String attempts;
 
+    @Override
+    public void checkId(String clientId) {
+
+    }
+
+    @Override
+    public void checkPin(String clientPin) {
+
+    }
+
+    @Override
+    public void setClient() {
+
+    }
+
+    @Override
+    public void getClient() {
+
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }
