@@ -19,9 +19,16 @@ public abstract class AbstractAtm implements AtmInterface {
 
    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+
     @Override
-    public String inputId(String clientId) throws IOException {
-        return null;
+    public String getCard(String cardId) {
+        return cardId;
+    }
+
+    @Override
+    public Boolean validId(String cardId) throws IOException {
+
+        return true;
     }
 
     @Override
@@ -43,4 +50,6 @@ public abstract class AbstractAtm implements AtmInterface {
     public String setCash() {
         return null;
     }
+
+
 }

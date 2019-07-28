@@ -7,7 +7,7 @@ public class Start {
 
         Client client1 = new Client();
 
-        client1.enterId();
+        client1.enterClientId();
 
     }
 }

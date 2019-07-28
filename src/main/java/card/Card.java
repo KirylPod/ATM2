@@ -1,7 +1,9 @@
 package card;
 
-import interfaces.ClientInterface;
-
 public class Card extends AbstractCard {
 
+    @Override
+    public void insertCardToAtm(String clientId) {
+        super.insertCardToAtm(clientId);
+    }
 }

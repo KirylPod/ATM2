@@ -20,7 +20,7 @@ public abstract class AbstractClient implements ClientInterface {
 
     private String clientId;
 
-    private Card card;
+    Card card = new Card();
 
     private int cash;
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

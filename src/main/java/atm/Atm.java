@@ -3,6 +3,6 @@ package atm;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class BelinvestbankAtm extends AbstractAtm{
+public class Atm extends AbstractAtm{
 
 }

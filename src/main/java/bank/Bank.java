@@ -5,7 +5,7 @@ import interfaces.ClientInterface;
 
 import java.util.ArrayList;
 
-public class Belinvestbank extends AbstarctBank {
+public class Bank extends AbstarctBank {
 
 
 

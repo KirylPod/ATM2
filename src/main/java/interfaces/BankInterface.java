@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface BankInterface {
 
-    public void checkId(String clientId);
+    public void checkId(String cardId);
 
     public void checkPin(String clientPin);
 

@@ -1,6 +1,6 @@
 package card;
 
-import interfaces.BankInterface;
+import atm.Atm;
 import interfaces.CardInterface;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,18 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public abstract class AbstractCard implements CardInterface {
+    Atm atm = new Atm();
 
     private String cardId;
 
-    private String cardPin;
-
-    public String getCardId() {
-        return cardId;
-    }
-
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
-    }
-
-
+    @Override
+    public void insertCardToAtm(String clientId) {
+        atm.getCard(clientId);
+            }
 }
