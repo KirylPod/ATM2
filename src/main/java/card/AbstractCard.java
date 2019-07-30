@@ -13,12 +13,17 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public abstract class AbstractCard implements CardInterface {
+
     Atm atm = new Atm();
 
     private String cardId;
 
+    public AbstractCard(String cardId) {
+        this.cardId = cardId;
+    }
+
     @Override
-    public void insertCardToAtm(String clientId) {
-        atm.getCard(clientId);
+    public void insertCardToAtm(String cardIdId) {
+        atm.getCard(cardIdId);
             }
 }

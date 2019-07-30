@@ -19,9 +19,9 @@ public abstract class AbstractAtm implements AtmInterface {
 
    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
     @Override
     public String getCard(String cardId) {
+
         return cardId;
     }
 

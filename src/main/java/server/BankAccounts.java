@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -17,8 +18,16 @@ import java.util.List;
 public class BankAccounts implements ServerInterface {
 
     private String cardId, cardPin, cardCash;
+
+    public BankAccounts(String cardId, String cardPin, String cardCash) {
+        this.cardId = cardId;
+        this.cardPin = cardPin;
+        this.cardCash = cardCash;
+    }
+
     private static List<BankAccounts> clientList;
     private File file;
+
     @Override
     public List<BankAccounts> getAccountValue() throws IOException {
         file = new File("src/main/resources/accounts");
@@ -32,4 +41,16 @@ public class BankAccounts implements ServerInterface {
         reader.close();
         return clientList;
            }
+
+    public BankAccounts getAccount(String clientCardId) throws IOException {
+        Optional<BankAccounts> account = getAccountValue()
+                .stream().filter(c -> c.getCardId().equals(clientCardId))
+                .findFirst();
+        if (account.isPresent()) {
+            return account.get();
+        } else {
+  //          bankServerPrint.errorAccount();
+            return null;
+        }
+    }
 }
