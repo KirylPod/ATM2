@@ -2,6 +2,8 @@ package interfaces;
 
 public interface CardInterface {
 
- public void insertCardToAtm(String clientId);
+    public String createCard(String clientId);
+
+    public void insertCardToAtm(String clientId);
 
 }

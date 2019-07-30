@@ -33,6 +33,7 @@ public abstract class AbstractClient implements ClientInterface {
 
         if (Pattern.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", getClientId())) {
             card.setCardId(getClientId());
+
         } else {
             errorClientId();
         }

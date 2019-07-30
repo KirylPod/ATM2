@@ -19,7 +19,7 @@ public abstract class AbstractCard implements CardInterface {
     private String cardId;
 
     public AbstractCard(String cardId) {
-        this.cardId = cardId;
+        this.cardId = getCardId();
     }
 
     @Override

@@ -5,9 +5,9 @@ import java.io.IOException;
 public class Start {
     public static void main(String[] args) throws IOException {
 
-        Client client1 = new Client();
+        Client client = new Client();
 
-        client1.enterClientId();
+        client.enterClientId();
 
     }
 }
