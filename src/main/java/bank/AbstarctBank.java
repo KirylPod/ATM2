@@ -17,33 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public abstract class AbstarctBank implements BankInterface {
+public abstract class AbstarctBank{
 
     private String attempts;
     private List<BankAccounts> clientList = new ArrayList<BankAccounts>();
-public BankAccounts bankAccounts;
-    @Override
-    public void checkId(String cardId) throws IOException {
-        bankAccounts.getAccount(cardId);
-    }
+    public BankAccounts bankAccounts;
 
-    @Override
-    public void checkPin(String clientPin) {
 
-    }
-
-    @Override
-    public void setClient() {
-
-    }
-
-    @Override
-    public void getClient() {
-
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
 }

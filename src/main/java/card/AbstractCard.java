@@ -1,29 +1,21 @@
 package card;
 
-import atm.Atm;
 import interfaces.CardInterface;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 
-public abstract class AbstractCard implements CardInterface {
+public abstract class AbstractCard  {
 
-    Atm atm = new Atm();
+    private String clientId;
 
-    private String cardId;
+    public AbstractCard(String clientId) {
+        this.clientId = clientId;
+         }
 
-    public AbstractCard(String cardId) {
-        this.cardId = getCardId();
-    }
 
-    @Override
-    public void insertCardToAtm(String cardIdId) {
-        atm.getCard(cardIdId);
-            }
 }
+
+
+
+
+
+

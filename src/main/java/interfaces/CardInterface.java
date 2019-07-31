@@ -1,9 +1,13 @@
 package interfaces;
 
+
+import card.AbstractCard;
+import card.Card;
+
 public interface CardInterface {
 
-    public String createCard(String clientId);
+    public Card createCard(String clientId);
 
-    public void insertCardToAtm(String clientId);
+    public Card insertCardToAtm(Card card);
 
 }

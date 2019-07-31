@@ -1,10 +1,12 @@
 package interfaces;
 
+import card.Card;
+
 import java.io.IOException;
 
 public interface AtmInterface {
 
-    public String getCard(String cardId);
+    public void getCard(Card card);
 
     public Boolean validId(String cardId) throws IOException;
 

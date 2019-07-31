@@ -1,9 +1,20 @@
 package card;
 
-public class Card extends AbstractCard {
+import interfaces.CardInterface;
+
+public class Card extends AbstractCard implements CardInterface {
+
+    public Card(String clientId) {
+        super(clientId);
+    }
 
     @Override
-    public void insertCardToAtm(String clientId) {
-        super.insertCardToAtm(clientId);
+    public Card createCard(String clientId) {
+        return null;
+    }
+
+    @Override
+    public Card insertCardToAtm(Card card) {
+        return null;
     }
 }
