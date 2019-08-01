@@ -2,19 +2,14 @@ package card;
 
 import interfaces.CardInterface;
 
+import java.io.IOException;
+import java.util.regex.Pattern;
+
 public class Card extends AbstractCard implements CardInterface {
 
-    public Card(String clientId) {
-        super(clientId);
-    }
-
     @Override
-    public Card createCard(String clientId) {
-        return null;
-    }
+    public Card createCard(String clientId) throws IOException {
 
-    @Override
-    public Card insertCardToAtm(Card card) {
         return null;
     }
 }

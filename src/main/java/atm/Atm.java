@@ -8,6 +8,10 @@ import java.io.IOException;
 
 public class Atm extends AbstractAtm implements AtmInterface {
 
+    public Atm(Card card, BufferedReader br) {
+        super(card, br);
+    }
+
     @Override
     public void getCard(Card card) {
 

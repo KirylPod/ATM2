@@ -1,3 +1,4 @@
+import card.Card;
 import client.Client;
 
 import java.io.IOException;
@@ -7,7 +8,7 @@ public class Start {
 
         Client client = new Client();
 
-        client.enterClientId();
+        client.createCard(client);
 
     }
 }

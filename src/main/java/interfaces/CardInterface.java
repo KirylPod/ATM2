@@ -1,13 +1,14 @@
 package interfaces;
 
 
-import card.AbstractCard;
 import card.Card;
+import client.Client;
+
+import java.io.IOException;
 
 public interface CardInterface {
 
-    public Card createCard(String clientId);
+    public Card createCard(String clientId) throws IOException;
 
-    public Card insertCardToAtm(Card card);
 
 }
