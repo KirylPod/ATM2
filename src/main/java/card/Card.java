@@ -3,13 +3,14 @@ package card;
 import interfaces.CardInterface;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
-public class Card extends AbstractCard implements CardInterface {
+public class Card extends AbstractCard {
 
-    @Override
-    public Card createCard(String clientId) throws IOException {
+    public Card() {
+        super();
+    }
 
-        return null;
+    public Card(String clientId, String clientPin) {
+        super(clientId, clientPin);
     }
 }

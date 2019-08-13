@@ -6,9 +6,7 @@ import java.io.IOException;
 
 public interface AtmInterface {
 
-    public void getCard(Card card);
-
-    public Boolean validId(String cardId) throws IOException;
+    public void validId(Card card) throws IOException;
 
     public String inputPin(String clientPin) throws IOException;
 
