@@ -13,6 +13,8 @@ public class Atm extends AbstractAtm {
     public Atm(Card card) {
         super(card);
     }
+
+
 }
 
 

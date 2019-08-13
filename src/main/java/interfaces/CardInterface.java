@@ -9,6 +9,4 @@ public interface CardInterface {
 
     public String createCard() throws IOException;
 
-    public void errorClientId() throws IOException;
-
-}
+   }

@@ -1,8 +1,7 @@
 package card;
 
-import atm.Atm;
+import atm.AtmEvents;
 import interfaces.CardInterface;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,27 +23,25 @@ public abstract class AbstractCard implements CardInterface {
     }
 
     private String clientId, clientPin;
+    private AtmEvents error;
 
     @Override
     public String createCard() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите номер карты, состоящий из цифр, в формате: ХХХХ-ХХХХ-ХХХХ-ХХХХ");
         clientId = br.readLine();
         if (Pattern.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", clientId)) {
             return clientId;
 
             } else {
-            errorClientId();
+            error.errorClientId();
         }
         br.close();
         return clientId;
     }
 
-    @Override
-    public void errorClientId() throws IOException {
-        System.out.println("Введенный номер карты не соотвествует заданному формату");
-        createCard();
-    }
+
+
 }
 
 
