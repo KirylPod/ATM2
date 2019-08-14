@@ -12,15 +12,5 @@ public interface BankInterface {
 
     public BankAccounts getAccount(String clientCardId) throws IOException;
 
-      public void checkPin(String clientPin);
-
-    public void setClient();
-
-    public void getClient();
-
-    String getName();
-
-
-
 
 }

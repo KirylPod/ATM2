@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 
 @Getter
@@ -26,80 +27,104 @@ public abstract class AbstractAtm implements AtmInterface {
     }
 
     private Card card;
-    private String money;
+    private AbstractAtmMoney atmMoney;
+    private AbstractAtmKeyboard keyboard;
     private BankAccounts account;
     private AtmEvents events;
     private Bank bank = new Bank();
-    private BufferedReader br;
 
+    private int cash;
+
+    private BufferedReader brAtm = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
     public void validId(Card card) throws IOException {
         account = bank.getAccount(card.getClientId());
+        inputPin(card);
         if (account == null) {
             events.errorClientId();
         }
     }
 
     @Override
-    public void inputPin(String clientPin) throws IOException {
+    public void inputPin(Card card) throws IOException {
 
         System.out.println("Введите пин-код, состоящий из цифр, в формате: ХХХХ");
-        card.setClientPin(br.readLine());
-        if (Pattern.matches("^\\d{4}", card.getClientPin()) && card.getClientPin().equals(clientPin)) {
-            validId(card);
-        } else {
-            events.errorClientPin(clientPin);
-        }
-        br.close();
-    }
 
+
+        card.setClientPin(brAtm.readLine());
+
+        if (Pattern.matches("^\\d{4}", card.getClientPin())) {
+
+            validPin(card);
+        } else {
+            events.errorClientPin(card.getClientPin());
+        }
+        brAtm.close();
+    }
 
     @Override
     public void validPin(Card card) throws IOException {
-        if(card.getClientPin().equals(account.getAccountPin())){
+        if (card.getClientPin().equals(account.getAccountPin())) {
             card.setClientPin(account.getAccountPin());
-            operation();
-        }else{
-
+            getAtmMoney();
+        } else {
+            events.errorAccountPin(card.getClientPin());
         }
-
     }
 
     @Override
 
-    public String getMoney() throws IOException {
-        cashMachineMoney.getCashMachineMoney();
-        operation();
+    public int getAtmMoney() throws IOException {
 
-        return money;
+        atmMoney.reedAtmMoney();
+
+        keyboard.operation();
+        return atmMoney.getMoney();
     }
 
     @Override
     public String checkBalance() {
-
-        account.setCardValue(cashMachineDriver.getValue(account.getAccountCash()));
-
-        return null;
+        System.out.println("На вашем счету = " + account.getAccountCash());
+        return account.getAccountCash();
     }
 
     @Override
-    public String inputCash() {
+    public AbstractAtmMoney getCash(AbstractAtmMoney atmMoney) throws IOException {
 
+        System.out.println("Введите сумму, которую желаете снять");
+        cash = Integer.parseInt(brAtm.readLine());
 
-        return null;
+        if (cash > atmMoney.getMoney()) {
+            events.errorGetCashId();
+        }
+        if (cash >= atmMoney.getMoney()) {
+            events.errorGetCashMachine();
+        }
+
+        System.out.println("Операция выполнена успешно, заберите деньги: " + cash);
+
+        atmMoney.setMoney(atmMoney.getMoney() - cash);
+
+        return atmMoney;
+
     }
 
     @Override
-    public String getCash() {
-        return null;
+    public AbstractAtmMoney setCash(AbstractAtmMoney atmMoney) throws IOException {
+
+        System.out.println("Введите сумму, на которую желаете пополнить счет");
+        cash = Integer.parseInt(brAtm.readLine());
+        if (cash >= 1000000) {
+            events.errorSetCashMachine();
+        }
+        atmMoney.setMoney(atmMoney.getMoney() + cash);
+        atmMoney.writeAtmMoney();
+
+        System.out.println("Операция выполнена успешно, вы пополнили счет на: " + cash);
+
+        return atmMoney;
+
     }
-
-    @Override
-    public String setCash() {
-        return null;
-    }
-
-
 
 }

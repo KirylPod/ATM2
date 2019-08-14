@@ -18,26 +18,31 @@ public class AtmEvents {
  //       cashMachine.actionPin(cardPin);
     }
 
-//    public void errorGetCashId() throws IOException {
-//        System.out.println("Недостаточно средств на счете");
+    public void errorAccountPin(String clientPin) throws IOException {
+        System.out.println("Вы ввели не верный PIN");
+        //       cashMachine.actionPin(cardPin);
+    }
+
+    public void errorGetCashId() throws IOException {
+        System.out.println("Недостаточно средств на счете");
 //        cashMachine.yesNo();
-//    }
-//
-//    public void errorGetCashMachine() throws IOException {
-//        System.out.println("Недостаточно средств в банкомате");
+    }
+
+    public void errorGetCashMachine() throws IOException {
+        System.out.println("Недостаточно средств в банкомате");
 //        cashMachine.yesNo();
-//    }
-//
-//    public void errorSetCashMachine() throws IOException {
-//        System.out.println("Сумма пополнения не должна превышать 1 000 000");
+    }
+
+    public void errorSetCashMachine() throws IOException {
+        System.out.println("Сумма пополнения не должна превышать 1 000 000");
 //        cashMachine.yesNo();
-//    }
-//    public void successCardId() throws IOException {
-//        System.out.println("Спасибо за то, что вы с нами. Удачного дня");
-//        System.out.println(" ");
+    }
+    public void successCardId() throws IOException {
+        System.out.println("Спасибо за то, что вы с нами. Удачного дня");
+        System.out.println(" ");
 //        client.newCashMachine();
-//
-//    }
+
+    }
     public void errorInputOperation() throws IOException {
         System.out.println("Данной операции не существует");
 //        cashMachine.operation();
