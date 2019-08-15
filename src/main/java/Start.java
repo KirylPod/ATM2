@@ -13,10 +13,7 @@ public class Start {
         Client client = new Client();
         client.takeCard();
 
-        AtmEvents events = new AtmEvents();
-        AtmKeyboard keyboard = new AtmKeyboard();
-        AtmMoney atmMoney = new AtmMoney();
-        Atm atm = new Atm(atmMoney, events, keyboard);
+        Atm atm = new Atm();
         atm.validId(client.getCard());
 
 

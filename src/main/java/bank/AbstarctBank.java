@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +48,17 @@ public abstract class AbstarctBank implements BankInterface {
         }
     }
 
-
+    @Override
+    public void setAccount(String id, String newValue) throws IOException {
+        clientList.stream().filter(c -> c.getAccountId().equals(id)).findFirst().get().setAccountCash(newValue);
+        file = new File("src/main/resources/creditCardList");
+        FileWriter writer = new FileWriter(file, false);
+        for (int i = 0; i < clientList.size(); i++) {
+            writer.write(clientList.get(i).getAccountId() + " " + clientList.get(i).getAccountPin() + " " + clientList.get(i).getAccountCash() + "\n");
+        }
+        clientList.clear();
+        writer.close();
+    }
 
 
 }

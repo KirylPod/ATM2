@@ -13,7 +13,7 @@ public interface AtmInterface {
 
     public void validPin(Card card) throws IOException;
 
-    public int getAtmMoney() throws IOException;
+    public void getAtmMoney() throws IOException;
 
     public void operation() throws IOException;
 
@@ -21,9 +21,10 @@ public interface AtmInterface {
 
     public String checkBalance();
 
-    public AtmMoney getCash(AtmMoney atmMoney) throws IOException;
+    public String getCash(String value) throws IOException;
 
-    public AtmMoney setCash(AtmMoney atmMoney) throws IOException;
+    public String setCash(String value) throws IOException;
 
+    public Integer stringToInt (String str);
 
 }

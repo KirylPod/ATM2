@@ -10,16 +10,16 @@ import java.io.*;
 @Setter
 public abstract class AbstractAtmMoney implements AtmMoneyInterface {
 
-    private int money;
+    private String money;
     private File file;
 
     @Override
-    public Integer reedAtmMoney() throws IOException {
+    public String reedAtmMoney() throws IOException {
 
 
         file = new File("src/main/resources/atmCash");
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        return money = Integer.parseInt(reader.readLine());
+        return money = reader.readLine();
     }
 
     @Override

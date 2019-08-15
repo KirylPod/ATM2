@@ -21,10 +21,11 @@ public abstract class AbstractAtm implements AtmInterface {
     private AtmMoney atmMoney = new AtmMoney();
     private AtmEvents events = new AtmEvents();
     private Bank bank = new Bank();
+    private Card card;
 
     private BankAccounts account;
     private int cash;
-    private int value;
+    private String value;
 
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -35,7 +36,6 @@ public abstract class AbstractAtm implements AtmInterface {
         if (account == null) {
             events.errorClientId();
         }
-
     }
 
     @Override
@@ -47,7 +47,7 @@ public abstract class AbstractAtm implements AtmInterface {
         } else {
             events.errorClientPin(card.getCardPin());
         }
-        br.close();
+
     }
 
     @Override
@@ -61,10 +61,9 @@ public abstract class AbstractAtm implements AtmInterface {
     }
 
     @Override
-    public int getAtmMoney() throws IOException {
-        value = atmMoney.reedAtmMoney();
+    public void getAtmMoney() throws IOException {
+        atmMoney.reedAtmMoney();
         operation();
-        return value;
     }
 
     @Override
@@ -80,22 +79,23 @@ public abstract class AbstractAtm implements AtmInterface {
             switch (num) {
                 case "1":
                     checkBalance();
-//                    account.setCardValue(cashMachineDriver.getValue(account.getCardValue()));
                     yesNo();
                     break;
                 case "2":
-//                    account.setCardValue(cashMachineDriver.getCash(account.getCardValue()));
+                    getCash(value);
+                    account.setAccountCash(value);
                     yesNo();
                     break;
                 case "3":
-//                    account.setCardValue(cashMachineDriver.setValue(account.getCardValue()));
+                    setCash(value);
+                    account.setAccountCash(value);
                     yesNo();
                     break;
                 case "4":
                     System.out.println("Заберите вашу карту");
-//                    bankServer.setNewValue(account.getCardId(), account.getCardValue());
-//                    cashMachineMoney.setCashMachineMoney();
-//                    cashMashinePrint.successCardId();
+                    bank.setAccount(account.getAccountId(), account.getAccountCash());
+                    atmMoney.setMoney(atmMoney.getMoney());
+                    events.successCardId();
                     break;
             }
 
@@ -103,7 +103,7 @@ public abstract class AbstractAtm implements AtmInterface {
             events.errorInputOperation();
 
         }
-        br.close();
+
     }
 
     @Override
@@ -113,7 +113,6 @@ public abstract class AbstractAtm implements AtmInterface {
         System.out.println("2 - Отмена");
         String num = br.readLine();
 
-
         if (Pattern.matches("^[1-2]{1}", num)) {
             switch (num) {
                 case "1":
@@ -121,9 +120,9 @@ public abstract class AbstractAtm implements AtmInterface {
                     break;
                 case "2":
                     System.out.println("Заберите вашу карту");
-//                    bankServer.setNewValue(account.getCardId(), account.getCardValue());
-//                    cashMachineMoney.setCashMachineMoney();
-//                    cashMashinePrint.successCardId();
+                    bank.setAccount(account.getAccountId(), account.getAccountCash());
+                    atmMoney.setMoney(atmMoney.getMoney());
+                    events.successCardId();
                     break;
             }
         } else {
@@ -141,43 +140,48 @@ public abstract class AbstractAtm implements AtmInterface {
     }
 
     @Override
-    public AtmMoney getCash(AtmMoney atmMoney) throws IOException {
+    public String getCash(String value) throws IOException {
 
         System.out.println("Введите сумму, которую желаете снять");
         cash = Integer.parseInt(br.readLine());
 
-        if (cash > atmMoney.getMoney()) {
+        if (cash > stringToInt(atmMoney.getMoney())) {
             events.errorGetCashId();
         }
-        if (cash >= atmMoney.getMoney()) {
+        if (cash >= stringToInt(atmMoney.getMoney())) {
             events.errorGetCashMachine();
         }
 
         System.out.println("Операция выполнена успешно, заберите деньги: " + cash);
 
-        atmMoney.setMoney(atmMoney.getMoney() - cash);
-        br.close();
-        return atmMoney;
+        atmMoney.setMoney(String.valueOf(stringToInt(atmMoney.getMoney()) - cash));
+
+        return value = String.valueOf(stringToInt(account.getAccountCash()) - cash);
 
     }
 
-
     @Override
-    public AtmMoney setCash(AtmMoney atmMoney) throws IOException {
+    public String setCash(String value) throws IOException {
 
         System.out.println("Введите сумму, на которую желаете пополнить счет");
         cash = Integer.parseInt(br.readLine());
         if (cash >= 1000000) {
             events.errorSetCashMachine();
         }
-        atmMoney.setMoney(atmMoney.getMoney() + cash);
+        atmMoney.setMoney(String.valueOf(stringToInt(atmMoney.getMoney()) + cash));
         atmMoney.writeAtmMoney();
 
         System.out.println("Операция выполнена успешно, вы пополнили счет на: " + cash);
-        br.close();
-        return atmMoney;
+
+        return value = String.valueOf(stringToInt(account.getAccountCash()) + cash);
 
     }
+
+    @Override
+    public Integer stringToInt(String str) {
+        return Integer.parseInt(str);
+    }
+
 }
 
 

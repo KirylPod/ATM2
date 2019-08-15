@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public interface AtmMoneyInterface {
 
-    public Integer reedAtmMoney() throws IOException;
+    public String reedAtmMoney() throws IOException;
     public void writeAtmMoney() throws IOException;
 }

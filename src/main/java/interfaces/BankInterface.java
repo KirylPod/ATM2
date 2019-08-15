@@ -12,5 +12,6 @@ public interface BankInterface {
 
     public BankAccounts getAccount(String clientCardId) throws IOException;
 
+    public void setAccount(String id, String newValue) throws IOException;
 
 }
