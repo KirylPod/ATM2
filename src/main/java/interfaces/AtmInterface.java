@@ -1,7 +1,7 @@
 package interfaces;
 
-import atm.AbstractAtmMoney;
-import card.Card;
+import atm.money.AtmMoney;
+import client.card.Card;
 
 import java.io.IOException;
 
@@ -15,10 +15,15 @@ public interface AtmInterface {
 
     public int getAtmMoney() throws IOException;
 
+    public void operation() throws IOException;
+
+    public void yesNo() throws IOException;
+
     public String checkBalance();
 
-    public AbstractAtmMoney getCash(AbstractAtmMoney atmMoney) throws IOException;
+    public AtmMoney getCash(AtmMoney atmMoney) throws IOException;
 
-    public AbstractAtmMoney setCash(AbstractAtmMoney atmMoney) throws IOException;
+    public AtmMoney setCash(AtmMoney atmMoney) throws IOException;
+
 
 }

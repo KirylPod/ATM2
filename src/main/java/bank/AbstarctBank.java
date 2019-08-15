@@ -22,7 +22,6 @@ import java.util.Optional;
 public abstract class AbstarctBank implements BankInterface {
 
     private List<BankAccounts> clientList = new ArrayList<BankAccounts>();
-    private BankAccounts accounts;
     private File file;
 
     @Override

@@ -1,4 +1,4 @@
-package atm;
+package atm.money;
 
 import interfaces.AtmMoneyInterface;
 import lombok.Getter;
@@ -15,6 +15,7 @@ public abstract class AbstractAtmMoney implements AtmMoneyInterface {
 
     @Override
     public Integer reedAtmMoney() throws IOException {
+
 
         file = new File("src/main/resources/atmCash");
         BufferedReader reader = new BufferedReader(new FileReader(file));

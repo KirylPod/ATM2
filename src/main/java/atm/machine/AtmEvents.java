@@ -1,4 +1,4 @@
-package atm;
+package atm.machine;
 
 import java.io.IOException;
 

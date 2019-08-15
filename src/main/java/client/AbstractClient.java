@@ -1,42 +1,36 @@
 package client;
 
-import atm.Atm;
-import card.Card;
+import client.card.Card;
 import interfaces.ClientInterface;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
 
 public abstract class AbstractClient implements ClientInterface {
 
-    public AbstractClient(Card card) {
-        this.card = card;
-    }
-
-    public AbstractClient() {
-    }
-
+    private String clientId;
     private Card card;
 
     @Override
-    public void goToAtm() throws IOException {
-        takeCard();
-    }
-
-    @Override
     public void takeCard() throws IOException {
-        card.createCard();
-        insertCardToAtm(card);
-    }
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Введите номер карты, состоящий из цифр, в формате: ХХХХ-ХХХХ-ХХХХ-ХХХХ");
+        clientId = br.readLine();
+        if (Pattern.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", clientId)) {
+            card = new Card(clientId, "");
 
-    @Override
-    public void insertCardToAtm(Card card) throws IOException {
-        Atm atm = new Atm(card);
-        atm.validId(card);
+        } else {
+            System.out.println("Введенный номер карты не соотвествует заданному формату");
+            takeCard();
+        }
 
-    }
+     }
+
 }
