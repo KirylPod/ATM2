@@ -10,22 +10,23 @@ import java.io.*;
 @Setter
 public abstract class AbstractAtmMoney implements AtmMoneyInterface {
 
-    private String money;
+    private int money;
     private File file;
 
     @Override
-    public String reedAtmMoney() throws IOException {
+    public Integer reedAtmMoney() throws IOException {
 
 
         file = new File("src/main/resources/atmCash");
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        return money = reader.readLine();
+        return money = Integer.parseInt(reader.readLine());
     }
 
     @Override
     public void writeAtmMoney() throws IOException {
         FileWriter writer = new FileWriter(file, false);
-        writer.write(String.format("%.2f", getMoney()).replace(',', '.'));
+//        writer.write(String.format("%.2f", getMoney()).replace(',', '.'));
+        writer.write(String.valueOf(getMoney()));
         writer.close();
 
     }

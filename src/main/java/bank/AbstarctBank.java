@@ -51,7 +51,7 @@ public abstract class AbstarctBank implements BankInterface {
     @Override
     public void setAccount(String id, String newValue) throws IOException {
         clientList.stream().filter(c -> c.getAccountId().equals(id)).findFirst().get().setAccountCash(newValue);
-        file = new File("src/main/resources/creditCardList");
+        file = new File("src/main/resources/accounts");
         FileWriter writer = new FileWriter(file, false);
         for (int i = 0; i < clientList.size(); i++) {
             writer.write(clientList.get(i).getAccountId() + " " + clientList.get(i).getAccountPin() + " " + clientList.get(i).getAccountCash() + "\n");

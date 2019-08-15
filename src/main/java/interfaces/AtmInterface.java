@@ -19,7 +19,7 @@ public interface AtmInterface {
 
     public void yesNo() throws IOException;
 
-    public String checkBalance();
+    public String checkBalance(String value);
 
     public String getCash(String value) throws IOException;
 

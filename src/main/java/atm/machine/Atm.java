@@ -6,7 +6,6 @@ import client.card.Card;
 import java.io.IOException;
 
 public class Atm extends AbstractAtm {
-
     @Override
     public void validId(Card card) throws IOException {
         super.validId(card);
@@ -38,8 +37,8 @@ public class Atm extends AbstractAtm {
     }
 
     @Override
-    public String checkBalance() {
-        return super.checkBalance();
+    public String checkBalance(String value) {
+        return super.checkBalance(value);
     }
 
     @Override

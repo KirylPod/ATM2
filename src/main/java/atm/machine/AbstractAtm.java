@@ -21,11 +21,11 @@ public abstract class AbstractAtm implements AtmInterface {
     private AtmMoney atmMoney = new AtmMoney();
     private AtmEvents events = new AtmEvents();
     private Bank bank = new Bank();
-    private Card card;
+
 
     private BankAccounts account;
     private int cash;
-    private String value;
+
 
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -34,7 +34,7 @@ public abstract class AbstractAtm implements AtmInterface {
         account = bank.getAccount(card.getCardId());
         inputPin(card);
         if (account == null) {
-            events.errorClientId();
+            events.errorAccountId();
         }
     }
 
@@ -45,9 +45,8 @@ public abstract class AbstractAtm implements AtmInterface {
         if (Pattern.matches("^\\d{4}", card.getCardPin())) {
             validPin(card);
         } else {
-            events.errorClientPin(card.getCardPin());
+            events.errorClientPin(card);
         }
-
     }
 
     @Override
@@ -78,32 +77,27 @@ public abstract class AbstractAtm implements AtmInterface {
         if (Pattern.matches("^[1-4]{1}", num)) {
             switch (num) {
                 case "1":
-                    checkBalance();
+                    account.setAccountCash(checkBalance(account.getAccountCash()));
                     yesNo();
                     break;
                 case "2":
-                    getCash(value);
-                    account.setAccountCash(value);
+                    account.setAccountCash(getCash(account.getAccountCash()));
                     yesNo();
                     break;
                 case "3":
-                    setCash(value);
-                    account.setAccountCash(value);
+                    account.setAccountCash(setCash(account.getAccountCash()));
                     yesNo();
                     break;
                 case "4":
                     System.out.println("Заберите вашу карту");
                     bank.setAccount(account.getAccountId(), account.getAccountCash());
-                    atmMoney.setMoney(atmMoney.getMoney());
+                    atmMoney.writeAtmMoney();
                     events.successCardId();
                     break;
             }
-
         } else {
             events.errorInputOperation();
-
         }
-
     }
 
     @Override
@@ -122,6 +116,7 @@ public abstract class AbstractAtm implements AtmInterface {
                     System.out.println("Заберите вашу карту");
                     bank.setAccount(account.getAccountId(), account.getAccountCash());
                     atmMoney.setMoney(atmMoney.getMoney());
+                    atmMoney.writeAtmMoney();
                     events.successCardId();
                     break;
             }
@@ -129,14 +124,12 @@ public abstract class AbstractAtm implements AtmInterface {
             events.errorInputYesNo();
         }
         br.close();
-
     }
 
     @Override
-    public String checkBalance() {
+    public String checkBalance(String value) {
         System.out.println("На вашем счету = " + account.getAccountCash());
         return account.getAccountCash();
-
     }
 
     @Override
@@ -145,16 +138,16 @@ public abstract class AbstractAtm implements AtmInterface {
         System.out.println("Введите сумму, которую желаете снять");
         cash = Integer.parseInt(br.readLine());
 
-        if (cash > stringToInt(atmMoney.getMoney())) {
+        if (cash > atmMoney.getMoney()) {
             events.errorGetCashId();
         }
-        if (cash >= stringToInt(atmMoney.getMoney())) {
+        if (cash >= atmMoney.getMoney()) {
             events.errorGetCashMachine();
         }
 
         System.out.println("Операция выполнена успешно, заберите деньги: " + cash);
 
-        atmMoney.setMoney(String.valueOf(stringToInt(atmMoney.getMoney()) - cash));
+        atmMoney.setMoney(atmMoney.getMoney() - cash);
 
         return value = String.valueOf(stringToInt(account.getAccountCash()) - cash);
 
@@ -168,13 +161,12 @@ public abstract class AbstractAtm implements AtmInterface {
         if (cash >= 1000000) {
             events.errorSetCashMachine();
         }
-        atmMoney.setMoney(String.valueOf(stringToInt(atmMoney.getMoney()) + cash));
-        atmMoney.writeAtmMoney();
 
         System.out.println("Операция выполнена успешно, вы пополнили счет на: " + cash);
 
-        return value = String.valueOf(stringToInt(account.getAccountCash()) + cash);
+        atmMoney.setMoney(atmMoney.getMoney() + cash);
 
+        return value = String.valueOf(stringToInt(account.getAccountCash()) + cash);
     }
 
     @Override

@@ -1,21 +1,24 @@
 package atm.machine;
 
+import client.Client;
+import client.card.Card;
+
 import java.io.IOException;
 
 public class AtmEvents {
 
-    public String getValue(String value) throws IOException {
-        System.out.println("На вашем счету = " + value);
-        return value;
-    }
-    public void errorClientId() throws IOException {
-        System.out.println("Введенный номер карты не соотвествует заданному формату");
- //       createCard();
+    private Atm atm;
+    private Client client;
+
+    public void errorAccountId() throws IOException {
+        System.out.println("Ваша карта не действительна");
+        System.out.println("Обратитесь в банк в которым вы обслуживаетесь");
+        client.takeCard();
     }
 
-    public void errorClientPin(String clientPin) throws IOException {
+    public void errorClientPin(Card card) throws IOException {
         System.out.println("Введенный пин-код не соотвествует заданному формату");
- //       cashMachine.actionPin(cardPin);
+        atm.inputPin(card);
     }
 
     public void errorAccountPin(String clientPin) throws IOException {

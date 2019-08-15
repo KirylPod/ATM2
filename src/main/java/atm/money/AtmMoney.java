@@ -12,7 +12,7 @@ public class AtmMoney extends AbstractAtmMoney {
 
 
     @Override
-    public String getMoney() {
+    public int getMoney() {
         return super.getMoney();
     }
 
@@ -22,7 +22,7 @@ public class AtmMoney extends AbstractAtmMoney {
     }
 
     @Override
-    public void setMoney(String money) {
+    public void setMoney(int money) {
         super.setMoney(money);
     }
 
@@ -32,7 +32,7 @@ public class AtmMoney extends AbstractAtmMoney {
     }
 
     @Override
-    public String reedAtmMoney() throws IOException {
+    public Integer reedAtmMoney() throws IOException {
         return super.reedAtmMoney();
     }
 
