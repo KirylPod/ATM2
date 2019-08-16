@@ -1,9 +1,6 @@
 package client;
 
-import client.card.Card;
-
 import java.io.IOException;
-
 
 public class Client extends AbstractClient {
 

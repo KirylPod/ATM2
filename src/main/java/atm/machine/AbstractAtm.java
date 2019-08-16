@@ -21,7 +21,7 @@ public abstract class AbstractAtm implements AtmInterface {
 
     private AtmMoney atmMoney = new AtmMoney();
     private Client client;
-    private AtmEvents events;
+    AtmEvents events;
     private Bank bank = new Bank(events);
 
 
@@ -34,8 +34,9 @@ public abstract class AbstractAtm implements AtmInterface {
     @Override
     public void validId(Card card) throws IOException {
         account = bank.getAccount(card.getCardId());
-        inputPin(card);
-        if (account == null) {
+        if (account != null) {
+            inputPin(card);
+        }else{
             events.errorAccountId();
         }
     }

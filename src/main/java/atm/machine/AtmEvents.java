@@ -1,11 +1,15 @@
 package atm.machine;
 
+
 import client.Client;
 import client.card.Card;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
-
-public class AtmEvents {
+@Getter
+@Setter
+public class AtmEvents  {
 
     private Atm atm;
     private Client client;
@@ -15,9 +19,10 @@ public class AtmEvents {
         this.client = client;
     }
 
+
     public void errorAccountId() throws IOException {
         System.out.println("Ваша карта не действительна");
-        System.out.println("Обратитесь в банк в которым вы обслуживаетесь");
+        System.out.println("Обратитесь в банк, в которым вы обслуживаетесь");
         client.takeCard();
     }
 

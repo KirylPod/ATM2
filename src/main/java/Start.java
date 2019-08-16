@@ -15,6 +15,7 @@ public class Start {
 
         Atm atm = new Atm();
         AtmEvents events = new AtmEvents(atm, client);
+
         atm.validId(client.getCard());
 
 

@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Bank extends AbstarctBank {
 
-
     public Bank(AtmEvents events) {
         super(events);
     }
