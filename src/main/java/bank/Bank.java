@@ -1,15 +1,13 @@
 package bank;
 
 import atm.machine.AtmEvents;
+import client.Client;
 
 import java.io.IOException;
 import java.util.List;
 
 public class Bank extends AbstarctBank {
 
-    public Bank(AtmEvents events) {
-        super(events);
-    }
 
     @Override
     public List<BankAccounts> getAccountValue() throws IOException {
@@ -17,8 +15,8 @@ public class Bank extends AbstarctBank {
     }
 
     @Override
-    public BankAccounts getAccount(String cardId) throws IOException {
-        return super.getAccount(cardId);
+    public BankAccounts getAccount(String cardId, Client client) throws IOException {
+        return super.getAccount(cardId, client);
     }
 
     @Override

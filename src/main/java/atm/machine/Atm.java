@@ -5,19 +5,20 @@ import client.card.Card;
 import java.io.IOException;
 
 public class Atm extends AbstractAtm {
+
     @Override
-    public void validId(Card card) throws IOException {
-        super.validId(card);
+    public void validId(Card card, AtmEvents events) throws IOException {
+        super.validId(card, events);
     }
 
     @Override
-    public void inputPin(Card card) throws IOException {
-        super.inputPin(card);
+    public void inputPin(Card card, AtmEvents events) throws IOException {
+        super.inputPin(card, events);
     }
 
     @Override
-    public void validPin(Card card) throws IOException {
-        super.validPin(card);
+    public void validPin(Card card, AtmEvents events) throws IOException {
+        super.validPin(card, events);
     }
 
     @Override

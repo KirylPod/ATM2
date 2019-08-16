@@ -3,65 +3,77 @@ package atm.machine;
 
 import client.Client;
 import client.card.Card;
+import interfaces.AtmEventsInterface;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+
 @Getter
 @Setter
-public class AtmEvents  {
+public class AtmEvents implements AtmEventsInterface {
 
     private Atm atm;
     private Client client;
+
 
     public AtmEvents(Atm atm, Client client) {
         this.atm = atm;
         this.client = client;
     }
 
-
-    public void errorAccountId() throws IOException {
+    @Override
+    public void errorAccountId(Client client) throws IOException {
         System.out.println("Ваша карта не действительна");
         System.out.println("Обратитесь в банк, в которым вы обслуживаетесь");
         client.takeCard();
     }
 
-    public void errorClientPin(Card card) throws IOException {
+    @Override
+    public void errorClientPin(Card card, Atm atm) throws IOException {
         System.out.println("Введенный пин-код не соотвествует заданному формату");
-        atm.inputPin(card);
+        atm.inputPin(card, this);
     }
 
-    public void errorAccountPin(Card card) throws IOException {
+    @Override
+    public void errorAccountPin(Card card, Atm atm) throws IOException {
         System.out.println("Вы ввели не верный PIN");
-        atm.validPin(card);
+        atm.validPin(card, this);
     }
 
-    public void errorGetCashId() throws IOException {
+    @Override
+    public void errorGetCashId(Atm atm) throws IOException {
         System.out.println("Недостаточно средств на счете");
         atm.yesNo();
     }
 
-    public void errorGetCashMachine() throws IOException {
+    @Override
+    public void errorGetCashMachine(Atm atm) throws IOException {
         System.out.println("Недостаточно средств в банкомате");
         atm.yesNo();
     }
 
-    public void errorSetCashMachine() throws IOException {
+    @Override
+    public void errorSetCashMachine(Atm atm) throws IOException {
         System.out.println("Сумма пополнения не должна превышать 1 000 000");
         atm.yesNo();
     }
-    public void successCardId() throws IOException {
+
+    @Override
+    public void successCardId(Client client) throws IOException {
         System.out.println("Спасибо за то, что вы с нами. Удачного дня");
         System.out.println(" ");
         client.takeCard();
 
     }
-    public void errorInputOperation() throws IOException {
+
+    @Override
+    public void errorInputOperation(Atm atm) throws IOException {
         System.out.println("Данной операции не существует");
         atm.operation();
     }
 
-    public void errorInputYesNo() throws IOException {
+    public void errorInputYesNo(Atm atm) throws IOException {
         System.out.println("Данной операции не существует");
         atm.yesNo();
     }

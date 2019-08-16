@@ -21,44 +21,43 @@ public abstract class AbstractAtm implements AtmInterface {
 
     private AtmMoney atmMoney = new AtmMoney();
     private Client client;
-    AtmEvents events;
-    private Bank bank = new Bank(events);
+    private AtmEvents events;
+    private Bank bank = new Bank();
 
 
     private BankAccounts account;
     private int cash;
 
-
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     @Override
-    public void validId(Card card) throws IOException {
-        account = bank.getAccount(card.getCardId());
+    public void validId(Card card, AtmEvents events) throws IOException {
+        account = bank.getAccount(card.getCardId(), client);
         if (account != null) {
-            inputPin(card);
+            inputPin(card, events);
         }else{
-            events.errorAccountId();
+            events.errorAccountId(client);
         }
     }
 
     @Override
-    public void inputPin(Card card) throws IOException {
+    public void inputPin(Card card, AtmEvents events) throws IOException {
         System.out.println("Введите Ваш пин-код, состоящий из цифр, в формате: ХХХХ");
         card.setCardPin(br.readLine());
         if (Pattern.matches("^\\d{4}", card.getCardPin())) {
-            validPin(card);
+            validPin(card, events);
         } else {
-            events.errorClientPin(card);
+            events.errorClientPin(card, (Atm) this);
         }
     }
 
     @Override
-    public void validPin(Card card) throws IOException {
+    public void validPin(Card card, AtmEvents events) throws IOException {
         if (card.getCardPin().equals(account.getAccountPin())) {
             card.setCardPin(account.getAccountPin());
             getAtmMoney();
         } else {
-            events.errorAccountPin(card);
+            events.errorAccountPin(card, (Atm) this);
         }
     }
 
@@ -95,11 +94,11 @@ public abstract class AbstractAtm implements AtmInterface {
                     System.out.println("Заберите вашу карту");
                     bank.setAccount(account.getAccountId(), account.getAccountCash());
                     atmMoney.writeAtmMoney();
-                    events.successCardId();
+                    events.successCardId(client);
                     break;
             }
         } else {
-            events.errorInputOperation();
+            events.errorInputOperation((Atm) this);
         }
     }
 
@@ -120,11 +119,11 @@ public abstract class AbstractAtm implements AtmInterface {
                     bank.setAccount(account.getAccountId(), account.getAccountCash());
                     atmMoney.setMoney(atmMoney.getMoney());
                     atmMoney.writeAtmMoney();
-                    events.successCardId();
+                    events.successCardId(client);
                     break;
             }
         } else {
-            events.errorInputYesNo();
+            events.errorInputYesNo((Atm) this);
         }
         br.close();
     }
@@ -142,10 +141,10 @@ public abstract class AbstractAtm implements AtmInterface {
         cash = Integer.parseInt(br.readLine());
 
         if (cash > atmMoney.getMoney()) {
-            events.errorGetCashId();
+            events.errorGetCashId((Atm) this);
         }
         if (cash >= atmMoney.getMoney()) {
-            events.errorGetCashMachine();
+            events.errorGetCashMachine((Atm) this);
         }
 
         System.out.println("Операция выполнена успешно, заберите деньги: " + cash);
@@ -162,7 +161,7 @@ public abstract class AbstractAtm implements AtmInterface {
         System.out.println("Введите сумму, на которую желаете пополнить счет");
         cash = Integer.parseInt(br.readLine());
         if (cash >= 1000000) {
-            events.errorSetCashMachine();
+            events.errorSetCashMachine((Atm) this);
         }
 
         System.out.println("Операция выполнена успешно, вы пополнили счет на: " + cash);
