@@ -1,9 +1,8 @@
 package bank;
 
+import atm.machine.AtmEvents;
 import interfaces.BankInterface;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.*;
@@ -13,13 +12,16 @@ import java.util.Optional;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 
 public abstract class AbstarctBank implements BankInterface {
 
     private List<BankAccounts> clientList = new ArrayList<BankAccounts>();
     private File file;
+    private AtmEvents events;
+
+    public AbstarctBank(AtmEvents events) {
+        this.events = events;
+    }
 
     @Override
     public List<BankAccounts> getAccountValue() throws IOException {
@@ -43,7 +45,7 @@ public abstract class AbstarctBank implements BankInterface {
         if (account.isPresent()) {
             return account.get();
         } else {
-            //          bankServerPrint.errorAccount();
+            events.errorAccountId();
             return null;
         }
     }

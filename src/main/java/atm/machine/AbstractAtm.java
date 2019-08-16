@@ -3,6 +3,7 @@ package atm.machine;
 import atm.money.AtmMoney;
 import bank.Bank;
 import bank.BankAccounts;
+import client.Client;
 import client.card.Card;
 import interfaces.AtmInterface;
 import lombok.Getter;
@@ -19,8 +20,9 @@ import java.util.regex.Pattern;
 public abstract class AbstractAtm implements AtmInterface {
 
     private AtmMoney atmMoney = new AtmMoney();
-    private AtmEvents events = new AtmEvents();
-    private Bank bank = new Bank();
+    private Client client;
+    private AtmEvents events;
+    private Bank bank = new Bank(events);
 
 
     private BankAccounts account;
@@ -55,7 +57,7 @@ public abstract class AbstractAtm implements AtmInterface {
             card.setCardPin(account.getAccountPin());
             getAtmMoney();
         } else {
-            events.errorAccountPin(card.getCardPin());
+            events.errorAccountPin(card);
         }
     }
 

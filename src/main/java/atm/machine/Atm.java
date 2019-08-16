@@ -1,6 +1,5 @@
 package atm.machine;
 
-import atm.money.AtmMoney;
 import client.card.Card;
 
 import java.io.IOException;

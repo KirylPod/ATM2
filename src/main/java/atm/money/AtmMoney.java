@@ -1,9 +1,5 @@
 package atm.money;
 
-import atm.money.AbstractAtmMoney;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.File;
 import java.io.IOException;
 
