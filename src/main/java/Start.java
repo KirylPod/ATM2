@@ -13,12 +13,5 @@ public class Start {
         Client client = new Client();
         client.takeCard();
 
-        Atm atm = new Atm();
-        AtmEvents events = new AtmEvents(atm, client);
-        atm.validId(client.getCard(), events);
-
-
-
-
     }
 }

@@ -32,49 +32,50 @@ public class AtmEvents implements AtmEventsInterface {
     @Override
     public void errorClientPin(Card card, Atm atm) throws IOException {
         System.out.println("Введенный пин-код не соотвествует заданному формату");
-        atm.inputPin(card, this);
+        atm.inputPin(client, card, this);
     }
 
     @Override
     public void errorAccountPin(Card card, Atm atm) throws IOException {
         System.out.println("Вы ввели не верный PIN");
-        atm.validPin(card, this);
+        atm.validPin(client, card, this);
     }
 
     @Override
-    public void errorGetCashId(Atm atm) throws IOException {
+    public void errorGetCashId(Atm atm, Client client) throws IOException {
         System.out.println("Недостаточно средств на счете");
-        atm.yesNo();
+        atm.yesNo(client);
     }
 
     @Override
-    public void errorGetCashMachine(Atm atm) throws IOException {
+    public void errorGetCashMachine(Atm atm, Client client) throws IOException {
         System.out.println("Недостаточно средств в банкомате");
-        atm.yesNo();
+        atm.yesNo(client);
     }
 
     @Override
-    public void errorSetCashMachine(Atm atm) throws IOException {
+    public void errorSetCashMachine(Atm atm, Client client) throws IOException {
         System.out.println("Сумма пополнения не должна превышать 1 000 000");
-        atm.yesNo();
+        atm.yesNo(client);
     }
 
     @Override
     public void successCardId(Client client) throws IOException {
         System.out.println("Спасибо за то, что вы с нами. Удачного дня");
         System.out.println(" ");
-        client.takeCard();
+        client.goToAtm();
 
     }
 
     @Override
-    public void errorInputOperation(Atm atm) throws IOException {
+    public void errorInputOperation(Atm atm, Client client) throws IOException {
         System.out.println("Данной операции не существует");
-        atm.operation();
+        atm.operation(client);
     }
 
-    public void errorInputYesNo(Atm atm) throws IOException {
+    @Override
+    public void errorInputYesNo(Atm atm, Client client) throws IOException {
         System.out.println("Данной операции не существует");
-        atm.yesNo();
+        atm.yesNo(client);
     }
 }

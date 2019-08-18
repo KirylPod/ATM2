@@ -1,5 +1,6 @@
 package atm.machine;
 
+import client.Client;
 import client.card.Card;
 
 import java.io.IOException;
@@ -7,33 +8,33 @@ import java.io.IOException;
 public class Atm extends AbstractAtm {
 
     @Override
-    public void validId(Card card, AtmEvents events) throws IOException {
-        super.validId(card, events);
+    public void validId(Client client, Card card, AtmEvents events) throws IOException {
+        super.validId(client, card, events);
     }
 
     @Override
-    public void inputPin(Card card, AtmEvents events) throws IOException {
-        super.inputPin(card, events);
+    public void inputPin(Client client, Card card, AtmEvents events) throws IOException {
+        super.inputPin(client, card, events);
     }
 
     @Override
-    public void validPin(Card card, AtmEvents events) throws IOException {
-        super.validPin(card, events);
+    public void validPin(Client client, Card card, AtmEvents events) throws IOException {
+        super.validPin(client, card, events);
     }
 
     @Override
-    public void getAtmMoney() throws IOException {
-        super.getAtmMoney();
+    public void getAtmMoney(Client client) throws IOException {
+        super.getAtmMoney(client);
     }
 
     @Override
-    public void operation() throws IOException {
-        super.operation();
+    public void operation(Client client) throws IOException {
+        super.operation(client);
     }
 
     @Override
-    public void yesNo() throws IOException {
-        super.yesNo();
+    public void yesNo(Client client) throws IOException {
+        super.yesNo(client);
     }
 
     @Override
