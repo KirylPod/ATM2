@@ -23,10 +23,10 @@ public class AtmEvents implements AtmEventsInterface {
     }
 
     @Override
-    public void errorAccountId(Client client) throws IOException {
+    public void errorAccountId(Client client, AtmEvents events) throws IOException {
         System.out.println("Ваша карта не действительна");
         System.out.println("Обратитесь в банк, в которым вы обслуживаетесь");
-        client.takeCard();
+        atm.go();
     }
 
     @Override
@@ -44,38 +44,39 @@ public class AtmEvents implements AtmEventsInterface {
     @Override
     public void errorGetCashId(Atm atm, Client client) throws IOException {
         System.out.println("Недостаточно средств на счете");
-        atm.yesNo(client);
+        atm.yesNo(client, this);
     }
 
     @Override
     public void errorGetCashMachine(Atm atm, Client client) throws IOException {
         System.out.println("Недостаточно средств в банкомате");
-        atm.yesNo(client);
+        atm.yesNo(client, this);
     }
 
     @Override
     public void errorSetCashMachine(Atm atm, Client client) throws IOException {
         System.out.println("Сумма пополнения не должна превышать 1 000 000");
-        atm.yesNo(client);
+        atm.yesNo(client, this);
     }
 
     @Override
     public void successCardId(Client client) throws IOException {
         System.out.println("Спасибо за то, что вы с нами. Удачного дня");
         System.out.println(" ");
-        client.goToAtm();
-
+        atm.go();
     }
 
     @Override
     public void errorInputOperation(Atm atm, Client client) throws IOException {
         System.out.println("Данной операции не существует");
-        atm.operation(client);
+        atm.operation(client, this);
     }
 
     @Override
     public void errorInputYesNo(Atm atm, Client client) throws IOException {
         System.out.println("Данной операции не существует");
-        atm.yesNo(client);
+        atm.yesNo(client, this);
     }
+
+
 }

@@ -2,7 +2,6 @@ package client.card;
 
 public class Card extends AbstractCard {
 
-
     public Card(String cardId, String cardPin) {
         super(cardId, cardPin);
     }

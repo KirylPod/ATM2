@@ -1,22 +1,20 @@
 package client;
 
+import atm.machine.Atm;
+import atm.machine.AtmEvents;
+
 import java.io.IOException;
 
 public class Client extends AbstractClient {
 
 
     @Override
-    public void goToAtm() throws IOException {
-        super.goToAtm();
+    public Client goToAtm(Atm atm, AtmEvents events) throws IOException {
+        return super.goToAtm(atm, events);
     }
 
     @Override
-    public void createObj() throws IOException {
-        super.createObj();
-    }
-
-    @Override
-    public void takeCard() throws IOException {
-        super.takeCard();
+    public void takeCard(Atm atm, AtmEvents events) throws IOException {
+        super.takeCard(atm, events);
     }
 }

@@ -15,8 +15,8 @@ public class Bank extends AbstarctBank {
     }
 
     @Override
-    public BankAccounts getAccount(String cardId, Client client) throws IOException {
-        return super.getAccount(cardId, client);
+    public BankAccounts getAccount(String cardId, Client client, AtmEvents events) throws IOException {
+        return super.getAccount(cardId, client, events);
     }
 
     @Override

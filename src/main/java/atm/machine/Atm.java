@@ -28,13 +28,13 @@ public class Atm extends AbstractAtm {
     }
 
     @Override
-    public void operation(Client client) throws IOException {
-        super.operation(client);
+    public void operation(Client client, AtmEvents events) throws IOException {
+        super.operation(client, events);
     }
 
     @Override
-    public void yesNo(Client client) throws IOException {
-        super.yesNo(client);
+    public void yesNo(Client client, AtmEvents events) throws IOException {
+        super.yesNo(client, events);
     }
 
     @Override

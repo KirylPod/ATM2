@@ -1,9 +1,10 @@
 package atm.money;
 
+
+
 import interfaces.AtmMoneyInterface;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.io.*;
 
 @Getter

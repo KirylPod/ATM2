@@ -20,23 +20,31 @@ import java.util.regex.Pattern;
 public abstract class AbstractAtm implements AtmInterface {
 
     private AtmMoney atmMoney = new AtmMoney();
-    private Client client;
-    private AtmEvents events;
     private Bank bank = new Bank();
-
+    private Client client = new Client();
 
     private BankAccounts account;
     private int cash;
 
+    AtmEvents events = new AtmEvents((Atm) this, client);
+
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    protected AbstractAtm() {
+    }
+
+    public void go() throws IOException {
+
+        validId(client.goToAtm((Atm) this, events), client.getCard(), events);
+    }
 
     @Override
     public void validId(Client client, Card card, AtmEvents events) throws IOException {
-        account = bank.getAccount(card.getCardId(), client);
+        account = bank.getAccount(card.getCardId(), client, events);
         if (account != null) {
             inputPin(client, card, events);
         }else{
-            events.errorAccountId(client);
+            events.errorAccountId(client, events);
         }
     }
 
@@ -64,11 +72,11 @@ public abstract class AbstractAtm implements AtmInterface {
     @Override
     public void getAtmMoney(Client client) throws IOException {
         atmMoney.reedAtmMoney();
-        operation(client);
+        operation(client, events);
     }
 
     @Override
-    public void operation(Client client) throws IOException {
+    public void operation(Client client, AtmEvents events) throws IOException {
 
         System.out.println("1 - Проверить баланс");
         System.out.println("2 - Снять наличные");
@@ -80,15 +88,15 @@ public abstract class AbstractAtm implements AtmInterface {
             switch (num) {
                 case "1":
                     account.setAccountCash(checkBalance(account.getAccountCash()));
-                    yesNo(client);
+                    yesNo(client, events);
                     break;
                 case "2":
                     account.setAccountCash(getCash(account.getAccountCash()));
-                    yesNo(client);
+                    yesNo(client, events);
                     break;
                 case "3":
                     account.setAccountCash(setCash(account.getAccountCash()));
-                    yesNo(client);
+                    yesNo(client, events);
                     break;
                 case "4":
                     System.out.println("Заберите вашу карту");
@@ -103,7 +111,7 @@ public abstract class AbstractAtm implements AtmInterface {
     }
 
     @Override
-    public void yesNo(Client client) throws IOException {
+    public void yesNo(Client client, AtmEvents events) throws IOException {
         System.out.println("Желаете продолжить?");
         System.out.println("1 - Продолжить");
         System.out.println("2 - Отмена");
@@ -112,7 +120,7 @@ public abstract class AbstractAtm implements AtmInterface {
         if (Pattern.matches("^[1-2]{1}", num)) {
             switch (num) {
                 case "1":
-                    operation(client);
+                    operation(client, events);
                     break;
                 case "2":
                     System.out.println("Заберите вашу карту");
@@ -175,6 +183,7 @@ public abstract class AbstractAtm implements AtmInterface {
     public Integer stringToInt(String str) {
         return Integer.parseInt(str);
     }
+
 
 }
 

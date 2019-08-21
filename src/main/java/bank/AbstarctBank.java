@@ -37,14 +37,14 @@ public abstract class AbstarctBank implements BankInterface {
     }
 
     @Override
-    public BankAccounts getAccount(String cardId, Client client) throws IOException {
+    public BankAccounts getAccount(String cardId, Client client, AtmEvents events) throws IOException {
         Optional<BankAccounts> account = getAccountValue()
                 .stream().filter(c -> c.getAccountId().equals(cardId))
                 .findFirst();
         if (account.isPresent()) {
             return account.get();
         } else {
-            events.errorAccountId(client);
+            events.errorAccountId(client, events);
             return null;
         }
     }

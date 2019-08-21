@@ -1,6 +1,7 @@
 package interfaces;
 
 import atm.machine.Atm;
+import atm.machine.AtmEvents;
 import client.Client;
 import client.card.Card;
 
@@ -8,7 +9,7 @@ import java.io.IOException;
 
 public interface AtmEventsInterface {
 
-    public void errorAccountId(Client client) throws IOException;
+    public void errorAccountId(Client client, AtmEvents events) throws IOException;
 
     public void errorClientPin(Card card, Atm atm) throws IOException;
 

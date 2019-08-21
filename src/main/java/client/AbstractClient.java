@@ -20,33 +20,36 @@ public abstract class AbstractClient implements ClientInterface {
     private String clientId;
     private Card card;
 
-    @Override
-    public void goToAtm() throws IOException {
-        Client client = null;
-        createObj();
+    public Card getCard() {
+        return card;
     }
 
-    public void createObj() throws IOException {
-        Client client = new Client();
-        takeCard();
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     @Override
-    public void takeCard() throws IOException {
+    public Client goToAtm(Atm atm, AtmEvents events) throws IOException {
+        takeCard(atm, events);
+        return (Client) this;
+    }
 
-        Atm atm = new Atm();
-        AtmEvents events = new AtmEvents(atm, (Client) this);
+
+    @Override
+    public void takeCard(Atm atm, AtmEvents events) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите номер карты, состоящий из цифр, в формате: ХХХХ-ХХХХ-ХХХХ-ХХХХ");
         clientId = br.readLine();
         if (Pattern.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", clientId)) {
             card = new Card(clientId, "");
             atm.validId((Client) this, card, events);
+
         } else {
             System.out.println("Введенный номер карты не соотвествует заданному формату");
-            takeCard();
+            takeCard(atm, events);
         }
 
-     }
+    }
 
 }

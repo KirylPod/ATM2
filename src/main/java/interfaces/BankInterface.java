@@ -1,5 +1,6 @@
 package interfaces;
 
+import atm.machine.AtmEvents;
 import bank.BankAccounts;
 import client.Client;
 
@@ -11,7 +12,7 @@ public interface BankInterface {
 
     public List<BankAccounts> getAccountValue() throws IOException;
 
-    public BankAccounts getAccount(String clientCardId, Client client) throws IOException;
+    public BankAccounts getAccount(String clientCardId, Client client, AtmEvents events) throws IOException;
 
     public void setAccount(String id, String newValue) throws IOException;
 

@@ -1,11 +1,12 @@
 package atm.money;
 
+
+
 import java.io.File;
 import java.io.IOException;
 
 
 public class AtmMoney extends AbstractAtmMoney {
-
 
     @Override
     public int getMoney() {

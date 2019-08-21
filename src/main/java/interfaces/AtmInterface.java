@@ -1,7 +1,6 @@
 package interfaces;
 
 import atm.machine.AtmEvents;
-import atm.money.AtmMoney;
 import client.Client;
 import client.card.Card;
 
@@ -17,9 +16,9 @@ public interface AtmInterface {
 
     public void getAtmMoney(Client client) throws IOException;
 
-    public void operation(Client client) throws IOException;
+    public void operation(Client client, AtmEvents events) throws IOException;
 
-    public void yesNo(Client client) throws IOException;
+    public void yesNo(Client client, AtmEvents events) throws IOException;
 
     public String checkBalance(String value);
 

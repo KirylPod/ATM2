@@ -9,7 +9,7 @@ public abstract class AbstractCard {
 
     private String cardId, cardPin;
 
-    public AbstractCard(String cardId, String cardPin) {
+       public AbstractCard(String cardId, String cardPin) {
         this.cardId = cardId;
         this.cardPin = cardPin;
     }
