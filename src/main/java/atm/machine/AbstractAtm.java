@@ -5,7 +5,9 @@ import bank.Bank;
 import bank.BankAccounts;
 import client.Client;
 import client.card.Card;
+import enums.Menu;
 import interfaces.AtmInterface;
+import interfaces.Logging;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +19,7 @@ import java.util.regex.Pattern;
 @Getter
 @Setter
 
-public abstract class AbstractAtm implements AtmInterface {
+public abstract class AbstractAtm implements AtmInterface, Logging {
 
     private AtmMoney atmMoney = new AtmMoney();
     private Bank bank = new Bank();
@@ -43,7 +45,7 @@ public abstract class AbstractAtm implements AtmInterface {
         account = bank.getAccount(card.getCardId(), client, events);
         if (account != null) {
             inputPin(client, card, events);
-        }else{
+        } else {
             events.errorAccountId(client, events);
         }
     }
@@ -78,10 +80,10 @@ public abstract class AbstractAtm implements AtmInterface {
     @Override
     public void operation(Client client, AtmEvents events) throws IOException {
 
-        System.out.println("1 - Проверить баланс");
-        System.out.println("2 - Снять наличные");
-        System.out.println("3 - Пополнить баланс");
-        System.out.println("4 - Вернуть карту");
+        getLogger().info(Menu.CHECK_BALANCE.getType());
+        getLogger().info(Menu.GET_CASH.getType());
+        getLogger().info(Menu.SET_CASH.getType());
+        getLogger().info(Menu.RETURN_CARD.getType());
 
         String num = br.readLine();
         if (Pattern.matches("^[1-4]{1}", num)) {

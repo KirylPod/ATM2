@@ -4,6 +4,7 @@ import atm.machine.AtmEvents;
 import client.Client;
 import interfaces.AtmEventsInterface;
 import interfaces.BankInterface;
+import interfaces.Logging;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Getter
 @Setter
 
-public abstract class AbstarctBank implements BankInterface {
+public abstract class AbstarctBank implements BankInterface, Logging {
 
     private List<BankAccounts> clientList = new ArrayList<BankAccounts>();
     private File file;

@@ -4,6 +4,7 @@ import atm.machine.Atm;
 import atm.machine.AtmEvents;
 import client.card.Card;
 import interfaces.ClientInterface;
+import interfaces.Logging;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
 @Getter
 @Setter
 
-public abstract class AbstractClient implements ClientInterface {
+public abstract class AbstractClient implements ClientInterface, Logging {
 
     private String clientId;
     private Card card;
@@ -37,9 +38,9 @@ public abstract class AbstractClient implements ClientInterface {
 
     @Override
     public void takeCard(Atm atm, AtmEvents events) throws IOException {
-
+        getLogger().info(ATM_START);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Введите номер карты, состоящий из цифр, в формате: ХХХХ-ХХХХ-ХХХХ-ХХХХ");
+        getLogger().info("\n" + "Введите номер карты, состоящий из цифр, в формате: ХХХХ-ХХХХ-ХХХХ-ХХХХ");
         clientId = br.readLine();
         if (Pattern.matches("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$", clientId)) {
             card = new Card(clientId, "");
