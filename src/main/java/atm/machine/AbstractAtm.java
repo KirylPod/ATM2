@@ -52,9 +52,11 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
 
     @Override
     public void inputPin(Client client, Card card, AtmEvents events) throws IOException {
-        System.out.println("Введите Ваш пин-код, состоящий из цифр, в формате: ХХХХ");
+
+        System.out.println("Enter PIN: ХХХХ");
         card.setCardPin(br.readLine());
         if (Pattern.matches("^\\d{4}", card.getCardPin())) {
+            getLogger().info(PROCESSING);
             validPin(client, card, events);
         } else {
             events.errorClientPin(card, (Atm) this);
@@ -80,6 +82,7 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
     @Override
     public void operation(Client client, AtmEvents events) throws IOException {
 
+        getLogger().info(Menu.SELECT.getType());
         getLogger().info(Menu.CHECK_BALANCE.getType());
         getLogger().info(Menu.GET_CASH.getType());
         getLogger().info(Menu.SET_CASH.getType());
@@ -101,7 +104,7 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
                     yesNo(client, events);
                     break;
                 case "4":
-                    System.out.println("Заберите вашу карту");
+                    getLogger().info(COMPLETE);
                     bank.setAccount(account.getAccountId(), account.getAccountCash());
                     atmMoney.writeAtmMoney();
                     events.successCardId(client);
@@ -114,9 +117,11 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
 
     @Override
     public void yesNo(Client client, AtmEvents events) throws IOException {
-        System.out.println("Желаете продолжить?");
-        System.out.println("1 - Продолжить");
-        System.out.println("2 - Отмена");
+
+        getLogger().info(Menu.CONTINUE.getType());
+        getLogger().info(Menu.YES.getType());
+        getLogger().info(Menu.NO.getType());
+
         String num = br.readLine();
 
         if (Pattern.matches("^[1-2]{1}", num)) {
@@ -125,7 +130,7 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
                     operation(client, events);
                     break;
                 case "2":
-                    System.out.println("Заберите вашу карту");
+                    getLogger().info(COMPLETE);
                     bank.setAccount(account.getAccountId(), account.getAccountCash());
                     atmMoney.setMoney(atmMoney.getMoney());
                     atmMoney.writeAtmMoney();
@@ -140,14 +145,14 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
 
     @Override
     public String checkBalance(String value) {
-        System.out.println("На вашем счету = " + account.getAccountCash());
+        System.out.println("Оn the screen " + account.getAccountCash());
         return account.getAccountCash();
     }
 
     @Override
     public String getCash(String value) throws IOException {
 
-        System.out.println("Введите сумму, которую желаете снять");
+        System.out.println("Other sum");
         cash = Integer.parseInt(br.readLine());
 
         if (cash > atmMoney.getMoney()) {
@@ -156,8 +161,8 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
         if (cash >= atmMoney.getMoney()) {
             events.errorGetCashMachine((Atm) this, client);
         }
-
-        System.out.println("Операция выполнена успешно, заберите деньги: " + cash);
+        getLogger().info(REQUEST);
+        System.out.println("Take your money: " + cash);
 
         atmMoney.setMoney(atmMoney.getMoney() - cash);
 
@@ -168,13 +173,13 @@ public abstract class AbstractAtm implements AtmInterface, Logging {
     @Override
     public String setCash(String value) throws IOException {
 
-        System.out.println("Введите сумму, на которую желаете пополнить счет");
+        System.out.println("Other sum");
         cash = Integer.parseInt(br.readLine());
         if (cash >= 1000000) {
             events.errorSetCashMachine((Atm) this, client);
         }
-
-        System.out.println("Операция выполнена успешно, вы пополнили счет на: " + cash);
+        getLogger().info(REQUEST);
+        System.out.println("Transfer complete: " + cash);
 
         atmMoney.setMoney(atmMoney.getMoney() + cash);
 

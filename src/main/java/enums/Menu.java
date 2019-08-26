@@ -1,19 +1,22 @@
 package enums;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum Menu {
 
-    CHECK_BALANCE("1 - Проверить баланс"),
-    GET_CASH("2 - Снять наличные"),
-    SET_CASH("3 - Пополнить баланс"),
-    RETURN_CARD("4 - Вернуть карту");
+    SELECT ("Select transaction"),
+    CHECK_BALANCE("1 - Verify the amount"),
+    GET_CASH("2 - Cash/withdraw"),
+    SET_CASH("3 - Transfer"),
+    RETURN_CARD("4 - Return card"),
+    CONTINUE("Continue?"),
+    YES("1 - Yes button"),
+    NO("2 - No button");
 
     private String type;
 
-    Menu(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
 }
